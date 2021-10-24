@@ -3,12 +3,24 @@
  <head>
   <link rel="stylesheet" href="stylesheet.css">
   <title>☆ようこそ☆</title>
+  <script>
+   window.onload = function() {
+   setInterval(function() {
+    var dd = new Date();
+    document.getElementById("T1").innerHTML = dd.toLocaleString();
+   }, 1000);
+  }
+ </script>
  </head>
  <body>
  ワイの秘密のホームページや<br>
  インターネット黎明期みたいなクソダサホームページ好きやろ？<br>
+ <br><br>更新履歴<br>
+ v1.0 2021/10/24 作成<br>
+ v1.1 2021/10/25 時計追加<br>
   <div style="position:absolute;  bottom:0px;">
    <span style="font-size:180%;">Copyright:nC2niconico<span>
   </div>
+  <div id="T1"></div>
  </body>
 </html>
