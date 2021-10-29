@@ -9,8 +9,9 @@ h1 {
 header{
  font-size: 36px;
  text-align: center;
- padding-top: 20px;
+ padding-top: 36px;
  background-image: url("header.JPG");
+ background-size: 10%;
 }
 
 footer{
