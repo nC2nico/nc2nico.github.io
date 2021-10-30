@@ -18,3 +18,11 @@ footer{
  text-align: center;
  padding-bottom: 20px;
 }
+
+.half-hidden{
+  text-decoration: none;
+}
+
+.half-hidden:hover{
+  text-decoration: underline;
+}
