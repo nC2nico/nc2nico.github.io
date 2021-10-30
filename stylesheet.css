@@ -20,9 +20,11 @@ footer{
 }
 
 .half-hidden{
+  color: #000;
   text-decoration: none;
 }
 
 .half-hidden:hover{
+  color: #000;
   text-decoration: underline;
 }
