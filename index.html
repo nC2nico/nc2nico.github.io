@@ -5,14 +5,6 @@
     <title>
       nC2's web pages
     </title>
-    <script>
-      window.onload = function() {
-        setInterval(function() {
-          var dd = new Date();
-          document.getElementById("T1").innerHTML = dd.toLocaleString();
-        }, 1000);
-      }
-    </script>
   </head>
   <body>
     <header>
@@ -38,8 +30,13 @@
         </div>
     </p>
     <p>
-      <h2>更新履歴</h2>
+      <h2>
+        <div onclick="obj=document.getElementById('menu1').style; obj.display=(obj.display=='none')?'block':'none';">
+          <a style="cursor:pointer;">▼更新履歴▼</a>
+        </div>
+      </h2>
         <p>
+          <div id="menu1" style="display:none;clear:both;">
           v1.0  2021/10/24 作成<br>
           v1.01 2021/10/25 時計追加<br>
           v1.02 2021/10/25 プチゲームリンク作成<br>
@@ -48,10 +45,13 @@
           背景削除
           v1.09 2021/10/28 相互リンク枠追加。&ソースコードの整備+表示上のバグ修正<br>
           v1.1  2021/10/29 装飾タグを活用してみる。一気にそれっぽくなった！
+          v1.11 2021/10/30 ヘッダー更新、ヘッダークリックでホームへ行けるように<br>
+          ツリーメニューを実装、一気にスッキリした！<br>
+          時計を外部ファイルへ
+          </div>
         </p>
     <div style="position:absolute;  bottom:0px;">
       <span style="font-size:150%;">© 2021 nc2nico.github.io All rights reserved. by nC2niconico<span>
     </div>
-    <div id="T1"></div>
   </body>
 </html>
