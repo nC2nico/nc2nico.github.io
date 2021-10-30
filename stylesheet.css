@@ -7,9 +7,10 @@ h1 {
 }
 
 header{
+ width: auto;
+ height: 10%;
  font-size: 36px;
  text-align: center;
- padding-top: 20px;
  background-color: lightskyblue;
 }
 
