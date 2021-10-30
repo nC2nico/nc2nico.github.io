@@ -1,0 +1,47 @@
+<html>
+<haed>
+  <meta charset="UTF-8" />
+</haed>
+<script>
+ 
+ 
+function downloadText() {
+ 
+        // 変更し易いようにパラメータは変数で定義してます。
+        // 定数使わない理由はIEで調子崩すような気がして怖いからです。
+ 
+  var string = 'ダウンロードできたかな？';
+  var title = 'testfile.txt';
+  var blobType = 'text/plain';
+ 
+  var linkTagId = 'getLocal';
+  var linkTag = document.getElementById(linkTagId);
+  var linkTagAttr =  ['href','download'];
+ 
+  var msSave = window.navigator;
+ 
+  var stringObject = new Blob([string], { type: blobType });
+  var objectURL = window.URL.createObjectURL(stringObject);   
+ 
+  var UA = window.navigator.userAgent.toLowerCase();
+ 
+　　　　// UAで判定しなくても、window.navigator.msSaveBlobでの判定も可能
+       // ただ、Edgeまで対象になるので、こうしてます。
+       // msSave使いたいのは、IEだけです。
+ 
+  if(UA.indexOf('msie') != -1 || UA.indexOf('trident') != -1) {
+                // IEの時はmsSaveOrOpenBlobかmsSaveBlobを利用します。
+    window.navigator.msSaveOrOpenBlob(stringObject, title); 
+  } else {
+    linkTag.setAttribute(linkTagAttr[0],objectURL);
+    linkTag.setAttribute(linkTagAttr[1],title); 
+  }
+ 
+ 
+};
+ 
+</script>
+<body>
+  <a id="getLocal" href="#" onClick="downloadText()">ダウンロードしてね</a>
+</body>
+</html>
