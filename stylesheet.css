@@ -7,7 +7,7 @@ h1 {
 }
 
 header{
- width: 110%;
+ width: auto;
  height: 10%;
  font-size: 36px;
  text-align: center;
@@ -17,7 +17,7 @@ header{
 footer{
  position:relative;
  bottom: 0px;
- width: 110%;
+ width: auto;
  height: 5%;
  font-size: 12px;
  text-align: center;
