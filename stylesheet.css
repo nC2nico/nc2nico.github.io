@@ -15,7 +15,8 @@ header{
 }
 
 footer{
- position:relative;
+ padding: 30px 0;
+ position: absolute;
  bottom: 0px;
  width: auto;
  height: 5%;
