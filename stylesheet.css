@@ -1,5 +1,5 @@
 body {
-  background-color: #fef;
+  background-color: #fff;
 }
 
 h1 {
@@ -17,7 +17,7 @@ header{
  height: 10%;
  font-size: 36px;
  text-align: center;
- background-color: lightskyblue;
+ background-color: #ccc;
 }
 
 footer{
