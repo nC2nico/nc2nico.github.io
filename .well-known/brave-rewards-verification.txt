@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: nc2nico.github.io
-Token: aae3453517a4ea21b9716c8500fa9e1eca175bbfc6d682376c64633bef1e3b43
