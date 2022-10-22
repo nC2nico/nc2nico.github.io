@@ -1,0 +1,71 @@
+<html>
+   <head>
+       <title>Phigseka</title>
+       <script type="text/javascript">
+	       var pf;
+           var gr;
+           var gd;
+           var bd;
+           var ms;
+           var cb;
+           var fc;
+           var lv;
+           
+           var score;
+           var rankscore;
+           var acc;
+           
+           function Calc() {
+               pf = parseInt(document.form1.perfect.value);
+               gr = parseInt(document.form1.great.value);
+               gd = parseInt(document.form1.good.value);
+               bd = parseInt(document.form1.bad.value);
+               ms = parseInt(document.form1.miss.value);
+               cb = parseInt(document.form1.combo.value);
+               lv = parseInt(document.form1.level.value);
+			   
+               fc = pf + gr + gd + bd + ms;
+			   console.log(fc);
+               
+			   var itxt1 = document.getElementById("scr");
+               var itxt2 = document.getElementById("ac");
+               var itxt3 = document.getElementById("rscr");
+			   
+               score = (900000*(pf+0.8*gr+0.5*gd+0.2*bd+0*ms)/fc+100000*cb/fc).toFixed();
+			   
+               acc = (pf + 0.8*gr)/fc;
+               rankscore = lv*((100*acc-55)/45)**2;
+               if (acc < 0.7) {
+               		rankscore = 0;
+               }
+               acc = (acc*100).toFixed(2);
+			   rankscore = rankscore.toFixed(2);
+               
+               itxt1.innerHTML = "スコア:"+String(score);
+               itxt2.innerHTML = "精度"+String(acc) + "%";
+               itxt3.innerHTML = "右上数値(ランキングスコア)"+String(rankscore);
+           }
+       </script>
+   </head>
+   <body>
+       <form name="form1">
+           Perfect:<INPUT TYPE="text" NAME="perfect"><br>
+           Great:<INPUT TYPE="text" NAME="great"><br>
+           Good:<INPUT TYPE="text" NAME="good"><br>
+           Bad:<INPUT TYPE="text" NAME="bad"><br>
+           Miss:<INPUT TYPE="text" NAME="miss"><br>
+           コンボ数:<INPUT TYPE="text" NAME="combo"><br>
+           譜面定数:<INPUT TYPE="text" NAME="level"><br>
+           <br>
+           <input type="button" name="cmdCalc" value="計算" onclick="Calc()"><br>
+           <div id="scr"></div>
+           <div id="ac"></div>
+           <div id="rscr"></div>
+           <p>
+           		スコア計算などの式はPhigros Wiki*(https://wikiwiki.jp/phigros/howtoplay)を参考にしています。
+           		各判定のスコア係数は、
+				perfect=100%,great=80%,good=50%,bad=20%,miss=0%としています。(適当に決めたので違うと思ったら教えてください)
+           </p>
+       </form>
+   </body>
+</html>
