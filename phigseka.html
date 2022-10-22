@@ -1,71 +1,98 @@
 <html>
-   <head>
-       <title>Phigseka</title>
-       <script type="text/javascript">
-	       var pf;
-           var gr;
-           var gd;
-           var bd;
-           var ms;
-           var cb;
-           var fc;
-           var lv;
-           
-           var score;
-           var rankscore;
-           var acc;
-           
-           function Calc() {
-               pf = parseInt(document.form1.perfect.value);
-               gr = parseInt(document.form1.great.value);
-               gd = parseInt(document.form1.good.value);
-               bd = parseInt(document.form1.bad.value);
-               ms = parseInt(document.form1.miss.value);
-               cb = parseInt(document.form1.combo.value);
-               lv = parseInt(document.form1.level.value);
-			   
-               fc = pf + gr + gd + bd + ms;
-			   console.log(fc);
-               
-			   var itxt1 = document.getElementById("scr");
-               var itxt2 = document.getElementById("ac");
-               var itxt3 = document.getElementById("rscr");
-			   
-               score = (900000*(pf+0.8*gr+0.5*gd+0.2*bd+0*ms)/fc+100000*cb/fc).toFixed();
-			   
-               acc = (pf + 0.8*gr)/fc;
-               rankscore = lv*((100*acc-55)/45)**2;
-               if (acc < 0.7) {
-               		rankscore = 0;
-               }
-               acc = (acc*100).toFixed(2);
-			   rankscore = rankscore.toFixed(2);
-               
-               itxt1.innerHTML = "ƒXƒRƒA:"+String(score);
-               itxt2.innerHTML = "¸“x"+String(acc) + "%";
-               itxt3.innerHTML = "‰Eã”’l(ƒ‰ƒ“ƒLƒ“ƒOƒXƒRƒA)"+String(rankscore);
-           }
-       </script>
-   </head>
-   <body>
-       <form name="form1">
-           Perfect:<INPUT TYPE="text" NAME="perfect"><br>
-           Great:<INPUT TYPE="text" NAME="great"><br>
-           Good:<INPUT TYPE="text" NAME="good"><br>
-           Bad:<INPUT TYPE="text" NAME="bad"><br>
-           Miss:<INPUT TYPE="text" NAME="miss"><br>
-           ƒRƒ“ƒ{”:<INPUT TYPE="text" NAME="combo"><br>
-           •ˆ–Ê’è”:<INPUT TYPE="text" NAME="level"><br>
-           <br>
-           <input type="button" name="cmdCalc" value="ŒvZ" onclick="Calc()"><br>
-           <div id="scr"></div>
-           <div id="ac"></div>
-           <div id="rscr"></div>
-           <p>
-           		ƒXƒRƒAŒvZ‚È‚Ç‚Ì®‚ÍPhigros Wiki*(https://wikiwiki.jp/phigros/howtoplay)‚ğQl‚É‚µ‚Ä‚¢‚Ü‚·B
-           		Še”»’è‚ÌƒXƒRƒAŒW”‚ÍA
-				perfect=100%,great=80%,good=50%,bad=20%,miss=0%‚Æ‚µ‚Ä‚¢‚Ü‚·B(“K“–‚ÉŒˆ‚ß‚½‚Ì‚Åˆá‚¤‚Æv‚Á‚½‚ç‹³‚¦‚Ä‚­‚¾‚³‚¢)
-           </p>
-       </form>
-   </body>
+	<head>
+		<title>Phigseka</title>
+		<script type="text/javascript">
+			var pf;
+			var gr;
+			var gd;
+			var bd;
+			var ms;
+			var cb;
+			var fc;
+			var lv;
+			
+			var score;
+			var rankscore;
+			var acc;
+			var rank = "F";
+
+			var clist = ["#427df1", "#fdfd55"];
+			var slist = [700000,820000,880000,920000,960000,1000000]
+			var rlist = ["C","B","A","S","V","Ï†"]
+			
+			function Calc() {
+				pf = parseInt(document.form1.perfect.value);
+				gr = parseInt(document.form1.great.value);
+				gd = parseInt(document.form1.good.value);
+				bd = parseInt(document.form1.bad.value);
+				ms = parseInt(document.form1.miss.value);
+				cb = parseInt(document.form1.combo.value);
+				lv = parseInt(document.form1.level.value);
+				   
+				fc = pf + gr + gd + bd + ms;
+				console.log(fc);
+				
+				var itxt1 = document.getElementById("scr");
+				var itxt2 = document.getElementById("ac");
+				var itxt3 = document.getElementById("rnk");
+				var itxt4 = document.getElementById("rscr");
+
+				var color = ""
+				
+				score = (900000*(pf+0.8*gr+0.5*gd+0.2*bd+0*ms)/fc+100000*cb/fc).toFixed();
+				 
+				acc = (pf + 0.8*gr)/fc;
+				rankscore = lv*((100*acc-55)/45)**2;
+				if (acc < 0.7) {
+					rankscore = 0;
+				}
+				acc = (acc*100).toFixed(2);
+				rankscore = rankscore.toFixed(2);
+
+				for (  var i = 0;  i < slist.length;  i++  ) {
+					if ( score >= slist[i]){
+						rank = rlist[i];
+					}
+				}
+				
+
+				if (cb == fc) {
+					color = clist[0];
+					rank = rlist[4];
+				}
+
+				if (pf == fc) {
+					color = clist[1];
+					rank = rlist[5];
+				}
+
+				itxt1.innerHTML = "ã‚¹ã‚³ã‚¢:"+String(score);
+				itxt2.innerHTML = "ç²¾åº¦"+String(acc) + "%";
+				itxt3.innerHTML = "<div style=\"color: "+color+"; font-size: 150%;\">rank:"+rank+"</div>";
+				itxt4.innerHTML = "ãƒ¬ãƒ¼ãƒˆ(ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã‚¹ã‚³ã‚¢)"+String(rankscore);
+			}
+		</script>
+	</head>
+	<body>
+		<form name="form1">
+			Perfect:<INPUT TYPE="text" NAME="perfect"><br>
+			Great:<INPUT TYPE="text" NAME="great"><br>
+			Good:<INPUT TYPE="text" NAME="good"><br>
+			Bad:<INPUT TYPE="text" NAME="bad"><br>
+			Miss:<INPUT TYPE="text" NAME="miss"><br>
+			ã‚³ãƒ³ãƒœæ•°:<INPUT TYPE="text" NAME="combo"><br>
+			è­œé¢å®šæ•°:<INPUT TYPE="text" NAME="level"><br>
+			<br>
+			<input type="button" name="cmdCalc" value="è¨ˆç®—" onclick="Calc()"><br>
+			<div id="scr"></div>
+			<div id="ac"></div>
+			<div id="rnk"></div>
+			<div id="rscr"></div>
+			<p>
+					ã‚¹ã‚³ã‚¢è¨ˆç®—ãªã©ã®å¼ã¯Phigros Wiki*(https://wikiwiki.jp/phigros/howtoplay)ã‚’å‚è€ƒã«ã—ã¦ã„ã¾ã™ã€‚
+					å„åˆ¤å®šã®ã‚¹ã‚³ã‚¢ä¿‚æ•°ã¯ã€
+					perfect=100%,great=80%,good=50%,bad=20%,miss=0%ã¨ã—ã¦ã„ã¾ã™ã€‚(é©å½“ã«æ±ºã‚ãŸã®ã§é•ã†ã¨æ€ã£ãŸã‚‰æ•™ãˆã¦ãã ã•ã„)
+			</p>
+		</form>
+	</body>
 </html>
