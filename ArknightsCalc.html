@@ -1,0 +1,101 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>アークナイツ計算ツール</title>
+    <script>
+        // 入力ボックスの要素を取得
+        var allyHP = document.getElementById("allyHP");
+        var allyATK = document.getElementById("allyATK");
+        var allyDEF = document.getElementById("allyDEF");
+        var enemyHP = document.getElementById("enemyHP");
+        var enemyATK = document.getElementById("enemyATK");
+        var enemyDEF = document.getElementById("enemyDEF");
+        var allyHPMod = document.getElementById("allyHPMod");
+        var allyATKMod = document.getElementById("allyATKMod");
+        var allyDEFMod = document.getElementById("allyDEFMod");
+        var enemyHPMod = document.getElementById("enemyHPMod");
+        var enemyATKMod = document.getElementById("enemyATKMod");
+        var enemyDEFMod = document.getElementById("enemyDEFMod");
+
+        // 計算結果の要素を取得
+        var resultDamageToEnemy = document.getElementById("resultDamageToEnemy");
+        var resultTurnsToEnemy = document.getElementById("resultTurnsToEnemy");
+        var resultDamageToAlly = document.getElementById("resultDamageToAlly");
+
+        // 決定ボタンの要素を取得
+        var button = document.getElementById("button");
+
+        // 決定ボタンが押されたときの処理
+        button.onclick = function() {
+            // 入力値を数値に変換
+            var aHP = Number(allyHP.value);
+            var aATK = Number(allyATK.value);
+            var aDEF = Number(allyDEF.value);
+            var eHP = Number(enemyHP.value);
+            var eATK = Number(enemyATK.value);
+            var eDEF = Number(enemyDEF.value);
+            var aHPM = Number(allyHPMod.value);
+            var aATKM = Number(allyATKMod.value);
+            var aDEFM = Number(allyDEFMod.value);
+            var eHPM = Number(enemyHPMod.value);
+            var eATKM = Number(enemyATKMod.value);
+            var eDEFM = Number(enemyDEFMod.value);
+
+            // 補正値を適用
+            aHP += aHPM;
+            aATK += aATKM;
+            aDEF += aDEFM;
+            eHP += eHPM;
+            eATK += eATKM;
+            eDEF += eDEFM;
+
+            // 敵へのダメージ実数値と耐久回数を計算
+            var damageToEnemy = Math.max(aATK - eDEF, 1); // ダメージは最低でも1
+            var turnsToEnemy = Math.ceil(eHP / damageToEnemy); // 小数点以下は切り上げ
+
+            // 味方へのダメージ実数値を計算
+            var damageToAlly = Math.max(eATK - aDEF, 1); // ダメージは最低でも1
+
+            // 計算結果を表示
+            resultDamageToEnemy.textContent = "敵へのダメージ: " + damageToEnemy;
+            resultTurnsToEnemy.textContent = "敵への耐久回数: " + turnsToEnemy;
+            resultDamageToAlly.textContent = "味方へのダメージ: " + damageToAlly;
+        }
+    </script>
+</head>
+<body>
+    <h1>ゲーム攻略ツール</h1>
+    <p>味方と敵のステータスと補正値を入力してください。</p>
+    <table border="1">
+        <tr>
+            <th></th>
+            <th>味方</th>
+            <th>敵</th>
+        </tr>
+        <tr>
+            <td>HP</td>
+            <td><input type="number" id="allyHP" value="100"></td>
+            <td><input type="number" id="enemyHP" value="100"></td>
+        </tr>
+        <tr>
+            <td>攻撃力</td>
+            <td><input type="number" id="allyATK" value="10"></td>
+            <td><input type="number" id="enemyATK" value="10"></td>
+        </tr>
+        <tr>
+            <td>防御力</td>
+            <td><input type="number" id="allyDEF" value="10"></td>
+            <td><input type="number" id="enemyDEF" value="10"></td>
+        </tr>
+        <tr>
+            <td>補正値</td>
+            <td><input type="number" id="allyHPMod" value="0"> / <input type="number" id="allyATKMod" value="0"> / <input type="number" id="allyDEFMod" value="0"></td>
+            <td><input type="number" id="enemyHPMod" value="0"> / <input type="number" id="enemyATKMod" value="0"> / <input type="number" id="enemyDEFMod" value="0"></td>
+        </tr>
+    </table>
+    <p><button id="button">決定</button></p>
+    <p id="resultDamageToEnemy"></p>
+    <p id="resultTurnsToEnemy"></p>
+    <p id="resultDamageToAlly"></p>
+</body>
+</html>
