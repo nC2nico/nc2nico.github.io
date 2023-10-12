@@ -22,6 +22,7 @@
             var resultDamageToEnemy = document.getElementById("resultDamageToEnemy");
             var resultTurnsToEnemy = document.getElementById("resultTurnsToEnemy");
             var resultDamageToAlly = document.getElementById("resultDamageToAlly");
+            var resultTurnsToAlly = document.getElementById("resultTurnsToAlly");
 
             // 決定ボタンの要素を取得
             var button = document.getElementById("button");
@@ -56,11 +57,13 @@
 
                 // 味方へのダメージ実数値を計算
                 var damageToAlly = Math.max(eATK - aDEF, eATK * 0.05); // ダメージは最低でも攻撃力の5%
+                var turnsToAlly = Math.ceil(aHP / damageToAlly); // 小数点以下は切り上げ
 
                 // 計算結果を表示
                 resultDamageToEnemy.textContent = "敵へのダメージ: " + damageToEnemy;
-                resultTurnsToEnemy.textContent = "敵への耐久回数: " + turnsToEnemy;
+                resultTurnsToEnemy.textContent = "敵の耐久回数: " + turnsToEnemy;
                 resultDamageToAlly.textContent = "味方へのダメージ: " + damageToAlly;
+                resultTurnsToAlly.textContent = "味方の耐久回数: " + turnsToAlly;
             }
         }
 
@@ -102,5 +105,6 @@
     <p id="resultDamageToEnemy"></p>
     <p id="resultTurnsToEnemy"></p>
     <p id="resultDamageToAlly"></p>
+    <p id="resultTurnsToAlly"></p>
 </body>
 </html>
