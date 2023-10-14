@@ -5,24 +5,55 @@
     <script>
         // 入力ボックスの要素を取得する関数
         function getElements() {
-            var allyHP = document.getElementById("allyHP");
+            var allyHP = document.getElementById("allyHP"); //ベース
             var allyATK = document.getElementById("allyATK");
             var allyDEF = document.getElementById("allyDEF");
+            var allyRES = document.getElementById("allyRES");
+            var allySPD = document.getElementById("allySPD");
+            var allyHPModPer = document.getElementById("allyHPModPer");    //割合補正
+            var allyATKModPer = document.getElementById("allyATKModPer");
+            var allyDEFModPer = document.getElementById("allyDEFModPer");
+            var allyRESModPer = document.getElementById("allyRESModPer");
+            var allyHPModAbs = document.getElementById("allyHPModAbs");    //絶対補正
+            var allyATKModAbs = document.getElementById("allyATKModAbs");
+            var allyDEFModAbs = document.getElementById("allyDEFModAbs");
+            var allyRESModAbs = document.getElementById("allyRESModAbs");
+            var allySPDModAbs = document.getElementById("allySPDModAbs");
+            var allyHPContPer = document.getElementById("allyHPContPer");  //契約補正
+            var allyATKContPer = document.getElementById("allyATKContPer");
+            var allyDEFContPer = document.getElementById("allyDEFContPer");
+            //var allyRESContPer = document.getElementById("allyRESContPer");
+            var allySPDContAbs = document.getElementById("allySPDContAbs");
+
             var enemyHP = document.getElementById("enemyHP");
             var enemyATK = document.getElementById("enemyATK");
             var enemyDEF = document.getElementById("enemyDEF");
-            var allyHPMod = document.getElementById("allyHPMod");
-            var allyATKMod = document.getElementById("allyATKMod");
-            var allyDEFMod = document.getElementById("allyDEFMod");
-            var enemyHPMod = document.getElementById("enemyHPMod");
-            var enemyATKMod = document.getElementById("enemyATKMod");
-            var enemyDEFMod = document.getElementById("enemyDEFMod");
+            var enemyRES = document.getElementById("enemyRES");
+            var enemySPD = document.getElementById("enemySPD");
+            var enemyHPModPer = document.getElementById("enemyHPModPer");
+            var enemyATKModPer = document.getElementById("enemyATKModPer");
+            var enemyDEFModPer = document.getElementById("enemyDEFModPer");
+            var enemyRESModPer = document.getElementById("enemyRESModPer");
+            var enemyHPModAbs = document.getElementById("enemyHPModAbs");
+            var enemyATKModAbs = document.getElementById("enemyATKModAbs");
+            var enemyDEFModAbs = document.getElementById("enemyDEFModAbs");
+            var enemyRESModAbs = document.getElementById("enemyRESModAbs");
+            var enemySPDModAbs = document.getElementById("enemySPDModAbs");
+            var enemyHPContPer = document.getElementById("enemyHPContPer");
+            var enemyATKContPer = document.getElementById("enemyATKContPer");
+            var enemyDEFContPer = document.getElementById("enemyDEFContPer");
+            //var enemyRESContPer = document.getElementById("enemyRESContPer");
+            var enemySPDContAbs = document.getElementById("enemySPDContAbs");
 
             // 計算結果の要素を取得
-            var resultDamageToEnemy = document.getElementById("resultDamageToEnemy");
-            var resultTurnsToEnemy = document.getElementById("resultTurnsToEnemy");
             var resultDamageToAlly = document.getElementById("resultDamageToAlly");
             var resultTurnsToAlly = document.getElementById("resultTurnsToAlly");
+            var resultDPSToAlly = document.getElementById("resultDPSToAlly");
+            var resultTimeToAlly = document.getElementById("resultTimeToAlly");
+            var resultDamageToEnemy = document.getElementById("resultDamageToEnemy");
+            var resultTurnsToEnemy = document.getElementById("resultTurnsToEnemy");
+            var resultDPSToEnemy = document.getElementById("resultDPSToEnemy");
+            var resultTimeToEnemy = document.getElementById("resultTimeToEnemy");
 
             // 決定ボタンの要素を取得
             var button = document.getElementById("button");
@@ -33,37 +64,49 @@
                 var aHP = Number(allyHP.value);
                 var aATK = Number(allyATK.value);
                 var aDEF = Number(allyDEF.value);
+                var aRES = Number(allyRES.value);
+                var aSPD = Number(allySPD.value);
+
                 var eHP = Number(enemyHP.value);
                 var eATK = Number(enemyATK.value);
                 var eDEF = Number(enemyDEF.value);
-                var aHPM = Number(allyHPMod.value);
-                var aATKM = Number(allyATKMod.value);
-                var aDEFM = Number(allyDEFMod.value);
-                var eHPM = Number(enemyHPMod.value);
-                var eATKM = Number(enemyATKMod.value);
-                var eDEFM = Number(enemyDEFMod.value);
+                var eRES = Number(enemyRES.value);
+                var eSPD = Number(enemySPD.value);
 
                 // 補正値を適用
-                aHP *= (1 + aHPM / 100); // 補正前数値×補正値(%)
-                aATK *= (1 + aATKM / 100); // 補正前数値×補正値(%)
-                aDEF *= (1 + aDEFM / 100); // 補正前数値×補正値(%)
-                eHP *= (1 + eHPM / 100); // 補正前数値×補正値(%)
-                eATK *= (1 + eATKM / 100); // 補正前数値×補正値(%)
-                eDEF *= (1 + eDEFM / 100); // 補正前数値×補正値(%)
+                aHP = aHP * (1 + Number(allyHPModPer.value) / 100) * (1 + Number(allyHPContPer.value) / 100) + Number(allyHPModAbs.value); // 補正前数値×割合補正値(%)+絶対補正値
+                aATK = aATK * (1 + Number(allyATKModPer.value) / 100) * (1 + Number(allyATKContPer.value) / 100) + Number(allyATKModAbs.value); // 補正前数値×割合補正値(%)+絶対補正値
+                aDEF = aDEF * (1 + Number(allyDEFModPer.value) / 100) * (1 + Number(allyDEFContPer.value) / 100) + Number(allyDEFModAbs.value); // 補正前数値×割合補正値(%)+絶対補正値
+                aRES = aRES * (1 + Number(allyRESModPer.value) / 100) + Number(allyRESModAbs.value);//補正前数値×割合補正値(%)+絶対補正値
+                aSPD = aSPD / (Math.max(Math.min(100 + Number(allySPDModAbs.value) + Number(allySPDContAbs.value), 600), 20) / 100);//補正前数値×割合補正値(%)+絶対補正値
 
-                // 敵へのダメージ実数値と耐久回数を計算
-                var damageToEnemy = Math.max(aATK - eDEF, aATK * 0.05); // ダメージは最低でも攻撃力の5%
-                var turnsToEnemy = Math.ceil(eHP / damageToEnemy); // 小数点以下は切り上げ
+                eHP = eHP * (1 + Number(enemyHPModPer.value) / 100) * (1 + Number(enemyHPContPer.value) / 100) + Number(enemyHPModAbs.value); // 補正前数値×割合補正値(%)+絶対補正値
+                eATK = eATK * (1 + Number(enemyATKModPer.value) / 100) * (1 + Number(enemyATKContPer.value) / 100) + Number(enemyATKModAbs.value); // 補正前数値×割合補正値(%)+絶対補正値
+                eDEF = eDEF * (1 + Number(enemyDEFModPer.value) / 100) * (1 + Number(enemyDEFContPer.value) / 100) + Number(enemyDEFModAbs.value); // 補正前数値×割合補正値(%)+絶対補正値
+                eRES = eRES * (1 + Number(enemyRESModPer.value) / 100) + Number(enemyRESModAbs.value);//補正前数値×割合補正値(%)+絶対補正値
+                eSPD = eSPD / (Math.max(Math.min(100 + Number(enemySPDModAbs.value) + Number(enemySPDContAbs.value), 600), 20) / 100);//補正前数値×割合補正値(%)+絶対補正値
 
                 // 味方へのダメージ実数値を計算
                 var damageToAlly = Math.max(eATK - aDEF, eATK * 0.05); // ダメージは最低でも攻撃力の5%
                 var turnsToAlly = Math.ceil(aHP / damageToAlly); // 小数点以下は切り上げ
+                var DPSToAlly = damageToAlly / (Math.round(eSPD * 30) / 30);
+                var timeToAlly = aHP / DPSToAlly;
+                
+                // 敵へのダメージ実数値と耐久回数を計算
+                var damageToEnemy = Math.max(aATK - eDEF, aATK * 0.05); // ダメージは最低でも攻撃力の5%
+                var turnsToEnemy = Math.ceil(eHP / damageToEnemy); // 小数点以下は切り上げ
+                var DPSToEnemy = damageToEnemy / (Math.round(aSPD * 30) / 30);
+                var timeToEnemy = eHP / DPSToEnemy;
 
                 // 計算結果を表示
                 resultDamageToEnemy.textContent = "敵へのダメージ: " + damageToEnemy;
                 resultTurnsToEnemy.textContent = "敵の耐久回数: " + turnsToEnemy;
+                resultDPSToEnemy.textContent = "敵へのDPS: " + DPSToEnemy;
+                resultTimeToEnemy.textContent = "敵の撃破時間: " + timeToEnemy;
                 resultDamageToAlly.textContent = "味方へのダメージ: " + damageToAlly;
                 resultTurnsToAlly.textContent = "味方の耐久回数: " + turnsToAlly;
+                resultDPSToAlly.textContent = "味方へのDPS: " + DPSToAlly;
+                resultTimeToAlly.textContent = "味方の耐久時間: " + timeToAlly;
             }
         }
 
@@ -72,7 +115,7 @@
     </script>
 </head>
 <body>
-    <h1>ゲーム攻略ツール</h1>
+    <h1>アークナイツ計算ツール</h1>
     <p>味方と敵のステータスと補正値を入力してください。</p>
     <table border="1">
         <tr>
@@ -82,29 +125,38 @@
         </tr>
         <tr>
             <td>HP</td>
-            <td><input type="number" id="allyHP" value="100"></td>
-            <td><input type="number" id="enemyHP" value="100"></td>
+            <td>基本値:<input type="number" id="allyHP" value="1565"><br>割合補正値:<input type="number" id="allyHPModPer" value="0">(%)<br>絶対補正値:<input type="number" id="allyHPModAbs" value="0"><br>契約補正値:<input type="number" id="allyHPContPer" value="0">(%)</td>
+            <td>基本値:<input type="number" id="enemyHP" value="550"><br>割合補正値:<input type="number" id="enemyHPModPer" value="0">(%)<br>絶対補正値:<input type="number" id="enemyHPModAbs" value="0"><br>契約補正値:<input type="number" id="enemyHPContPer" value="0">(%)</td>
         </tr>
         <tr>
             <td>攻撃力</td>
-            <td><input type="number" id="allyATK" value="10"></td>
-            <td><input type="number" id="enemyATK" value="10"></td>
+            <td>基本値:<input type="number" id="allyATK" value="520"><br>割合補正値:<input type="number" id="allyATKModPer" value="0">(%)<br>絶対補正値:<input type="number" id="allyATKModAbs" value="0"><br>契約補正値:<input type="number" id="allyATKContPer" value="0">(%)</td>
+            <td>基本値:<input type="number" id="enemyATK" value="130"><br>割合補正値:<input type="number" id="enemyATKModPer" value="0">(%)<br>絶対補正値:<input type="number" id="enemyATKModAbs" value="0"><br>契約補正値:<input type="number" id="enemyATKContPer" value="0">(%)</td>
         </tr>
         <tr>
             <td>防御力</td>
-            <td><input type="number" id="allyDEF" value="10"></td>
-            <td><input type="number" id="enemyDEF" value="10"></td>
+            <td>基本値:<input type="number" id="allyDEF" value="372"><br>割合補正値:<input type="number" id="allyDEFModPer" value="0">(%)<br>絶対補正値:<input type="number" id="allyDEFModAbs" value="0"><br>契約補正値:<input type="number" id="allyDEFContPer" value="0">(%)</td>
+            <td>基本値:<input type="number" id="enemyDEF" value="0"><br>割合補正値:<input type="number" id="enemyDEFModPer" value="0">(%)<br>絶対補正値:<input type="number" id="enemyDEFModAbs" value="0"><br>契約補正値:<input type="number" id="enemyDEFContPer" value="0">(%)</td>
         </tr>
         <tr>
-            <td>補正値(%)</td>
-            <td><input type="number" id="allyHPMod" value="0"> / <input type="number" id="allyATKMod" value="0"> / <input type="number" id="allyDEFMod" value="0"></td>
-            <td><input type="number" id="enemyHPMod" value="0"> / <input type="number" id="enemyATKMod" value="0"> / <input type="number" id="enemyDEFMod" value="0"></td>
+            <td>術耐性</td>
+            <td>基本値:<input type="number" id="allyRES" value="0"><br>割合補正値:<input type="number" id="allyRESModPer" value="0">(%)<br>絶対補正値:<input type="number" id="allyRESModAbs" value="0"></td>
+            <td>基本値:<input type="number" id="enemyRES" value="0"><br>割合補正値:<input type="number" id="enemyRESModPer" value="0">(%)<br>絶対補正値:<input type="number" id="enemyRESModAbs" value="0"></td>
+        </tr>
+        <tr>
+            <td>攻撃速度</td>
+            <td>基本値:<input type="number" id="allySPD" value="1.3">(sec)<br>補正値:<input type="number" id="allySPDModAbs" value="0"><br>契約補正値:<input type="number" id="allySPDContAbs" value="0"></td>
+            <td>基本値:<input type="number" id="enemySPD" value="1.7">(sec)<br>補正値:<input type="number" id="enemySPDModAbs" value="0"><br>契約補正値:<input type="number" id="enemySPDContAbs" value="0"></td>
         </tr>
     </table>
     <p><button id="button">決定</button></p>
     <p id="resultDamageToEnemy"></p>
     <p id="resultTurnsToEnemy"></p>
+    <p id="resultDPSToEnemy"></p>
+    <p id="resultTimeToEnemy"></p>
     <p id="resultDamageToAlly"></p>
     <p id="resultTurnsToAlly"></p>
+    <p id="resultDPSToAlly"></p>
+    <p id="resultTimeToAlly"></p>
 </body>
 </html>
