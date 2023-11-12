@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>Phigseka</title>
+		<script type="text/javascript">
+			var pf;
+			var gr;
+			var gd;
+			var bd;
+			var ms;
+			var lv;
+			
+			var score;
+			var rate;
+			var rank = "D";
+
+			var clist = ["#427df1", "#fdfd55"];
+			var slist = [500000,800000,900000,925000,950000,975000,980000,990000,1000000]
+			var rlist = ["C","B","A","A+","S","SS","SS+","SSS","P"]
+			
+			function Calc() {
+				pf = parseInt(document.form1.perfect.value);
+				gr = parseInt(document.form1.great.value);
+				gd = parseInt(document.form1.good.value);
+				bd = parseInt(document.form1.bad.value);
+				ms = parseInt(document.form1.miss.value);
+				lv = parseInt(document.form1.level.value);
+				   
+				fc = pf + gr + gd + bd + ms;
+				console.log(fc);
+				
+				var itxt1 = document.getElementById("scr");
+				var itxt2 = document.getElementById("rnk");
+				var itxt3 = document.getElementById("rate");
+
+				var color = ""
+				
+				score = (1000000*(pf+0.9*gr+0.5*gd+0*bd+0*ms)/).toFixed();
+				 
+				rate = lv
+				if (score <= 500000) {
+					rate = 0;
+				}
+				rate = rate.toFixed(2);
+
+				for (  var i = 0;  i < slist.length;  i++  ) {
+					if ( score >= slist[i]){
+						rank = rlist[i];
+					}
+				}
+
+				itxt1.innerHTML = "スコア:"+String(score);
+				itxt2.innerHTML = "<div style=\"color: "+color+"; font-size: 150%;\">rank:"+rank+"</div>";
+				itxt3.innerHTML = "レート"+String(rankscore);
+			}
+		</script>
+	</head>
+	<body>
+		<form name="form1">
+			Perfect:<INPUT TYPE="text" NAME="perfect"><br>
+			Great:<INPUT TYPE="text" NAME="great"><br>
+			Good:<INPUT TYPE="text" NAME="good"><br>
+			Bad:<INPUT TYPE="text" NAME="bad"><br>
+			Miss:<INPUT TYPE="text" NAME="miss"><br>
+			譜面定数:<INPUT TYPE="text" NAME="level"><br>
+			<br>
+			<input type="button" name="cmdCalc" value="計算" onclick="Calc()"><br>
+			<div id="scr"></div>
+			<div id="rnk"></div>
+			<div id="rate"></div>
+			<p>
+					スコア計算などの式はPhigros Wiki*(https://wikiwiki.jp/phigros/howtoplay)を参考にしています。
+					各判定のスコア係数は、
+					perfect=100%,great=90%,good=50%,bad=0%,miss=0%としています。(適当に決めたので違うと思ったら教えてください)
+			</p>
+		</form>
+	</body>
+</html>
