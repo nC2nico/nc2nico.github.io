@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.5, user-scalable=no">
+    <script type="text/javascript" src="simcir.js"></script>
+    <link rel="stylesheet" type="text/css" href="simcir.css" />
+    <script type="text/javascript" src="simcir-basicset.js"></script>
+    <link rel="stylesheet" type="text/css" href="simcir-basicset.css" />
+    <!--<script type="text/javascript" src="simcir-library.js"></script>-->
+    <script type="text/javascript" src="simcir-ext.js"></script>
+    <title>SimcirJS - タッチ対応版</title>
+  </head>
+  <body>
+    <div class="simcir">
+      {
+        "width":640,
+        "height":420,
+        "showToolbox":true,
+        "toolbox":[
+          {"type":"DC"},
+          {"type":"Toggle"},
+          {"type":"LED","color":"#ff0000","label":"LED"},
+          {"type":"AND","label":"AND"},
+          {"type":"OR","label":"OR"},
+          {"type":"NOT","label":"NOT"},
+          {"type":"NAND","label":"NAND"},
+          {"type":"XOR","label":"XOR"},
+          {"type":"4bit7seg","color":"#ff0000"}
+        ]
+      }
+    </div>
+    <p><button onclick="urlCopy()">URL としてクリップボードに保存</button> <a href="./">白紙状態に戻す</a></p>
+    <p><a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho/Y2016/LogicSimulator/LogicSimulator/01.html">Original Version</a></p>
+  </body>
+</html>
